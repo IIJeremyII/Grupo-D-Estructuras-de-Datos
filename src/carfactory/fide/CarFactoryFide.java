@@ -15,7 +15,7 @@ public class CarFactoryFide {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        //Prueba 2
         //Hola mundo
     }//FIN DEL MAIN
     
