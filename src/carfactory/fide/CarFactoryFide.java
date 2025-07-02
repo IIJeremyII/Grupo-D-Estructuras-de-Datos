@@ -4,19 +4,21 @@
  */
 package carfactory.fide;
 
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author jerse
  */
 public class CarFactoryFide {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
-        //Prueba 2
-        //Hola mundo
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                JFrameOne frame1 = new JFrameOne();
+            }
+        });
     }//FIN DEL MAIN
-    
+
 }
