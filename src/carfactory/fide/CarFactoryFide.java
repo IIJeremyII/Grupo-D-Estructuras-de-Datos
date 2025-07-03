@@ -17,7 +17,7 @@ public class CarFactoryFide {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrameOne frame1 = new JFrameOne();
-            }
+            }//hola
         });
     }//FIN DEL MAIN
 
