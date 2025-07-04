@@ -16,7 +16,7 @@ public class JFrameOne extends JFrame {
         initialize();
     }
     
-    public void initialize() {
+    private void initialize() {
         setTitle("CarFactory-Fide");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1200,700);
