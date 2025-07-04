@@ -8,6 +8,14 @@ package carfactory.fide;
  *
  * @author jerse
  */
-public class materiales { // Inicio de la clase
-    
-}//Fin de la clase 
+public class NodoMaterial {
+
+    material material;
+    NodoMaterial siguiente;
+
+    public NodoMaterial(material material) {
+        this.material = material;
+        this.siguiente = null;
+    }
+
+}
