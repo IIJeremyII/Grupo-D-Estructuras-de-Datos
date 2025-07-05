@@ -31,13 +31,22 @@ public class cintaTransportadora {// Inicio de la clase
         }
     }
 
+    //Agregue los otros materiales
     private material generarMaterial() {
-        int aleatorio = (int) (Math.random() * 2);
+        int aleatorio = (int) (Math.random() * 6);
         switch (aleatorio) {
             case 0:
                 return new material("Motor de lujo", 500);
             case 1:
+                return new material("Motor especial deportivo", 2000);
+            case 2:
                 return new material("Carroceria", 500);
+            case 3:
+                return new material("Carroceria especial", 800);
+            case 4:
+                return new material("Llantas deportivas", 2000);
+            case 5:
+                return new material("Llantas unicas de trabajo", 800);
             default:
                 return new material("Error", 0);
         }

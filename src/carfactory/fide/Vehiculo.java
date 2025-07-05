@@ -31,7 +31,7 @@ public class Vehiculo {//Inicio
         }
     }
 
-    public boolean recibirMaterial(Material m) {
+    public boolean recibirMaterial(material m) {
         NodoMaterial actual = materialesNecesarios.getcabeza();
         NodoMaterial anterior = null;
 
@@ -41,7 +41,7 @@ public class Vehiculo {//Inicio
                     materialesNecesarios.eliminarPrimero();
                 } else {
                     anterior.siguiente = actual.siguiente;
-                    materialesNecesarios.getTamano--;
+       //             materialesNecesarios.getTamano--;
                 }
                 return true;
             }

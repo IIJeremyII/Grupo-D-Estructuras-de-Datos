@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/CarFactory-Fide/src/carfactory/fide/CarFactoryFide.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/CarFactory-Fide/src/carfactory/fide/material.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/CarFactory-Fide/src/carfactory/fide/NodoMaterial.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/CarFactory-Fide/src/carfactory/fide/ListaMateriales.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/CarFactory-Fide/src/carfactory/fide/cintaTransportadora.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/CarFactory-Fide/src/carfactory/fide/Vehiculo.java</file>
+            <file>file:/C:/Users/AMD/Desktop/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/cintaTransportadora.java</file>
+            <file>file:/C:/Users/AMD/Desktop/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/material.java</file>
+            <file>file:/C:/Users/AMD/Desktop/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/hub.java</file>
+            <file>file:/C:/Users/AMD/Desktop/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/lineaProduccion.java</file>
+            <file>file:/C:/Users/AMD/Desktop/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/JFrameOne.java</file>
+            <file>file:/C:/Users/AMD/Desktop/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/ListaMateriales.java</file>
+            <file>file:/C:/Users/AMD/Desktop/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/NodoMaterial.java</file>
+            <file>file:/C:/Users/AMD/Desktop/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/Vehiculo.java</file>
         </group>
     </open-files>
 </project-private>
