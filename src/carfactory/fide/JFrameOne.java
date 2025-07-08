@@ -12,6 +12,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.dnd.DropTarget;
+import java.awt.FlowLayout;
+import java.awt.LayoutManager;
+
 
 //Importes para el drag and drop del raton
 import java.awt.event.MouseAdapter;
@@ -19,7 +22,10 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
+import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 /**
  *
  * @author jeremy.segura
@@ -119,16 +125,25 @@ public class JFrameOne extends JFrame {
         linea1.setPreferredSize(new Dimension(200, 200));
         linea1.setOpaque(true);
         linea1.setBackground(Color.LIGHT_GRAY);
-
+        linea1.setForeground(Color.BLACK);
+        linea1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        linea1.setHorizontalAlignment(SwingConstants.CENTER);
+        
         linea2 = new JLabel("Pick-up de alta gama");
         linea2.setPreferredSize(new Dimension(200, 200));
         linea2.setOpaque(true);
         linea2.setBackground(Color.LIGHT_GRAY);
+        linea2.setForeground(Color.BLACK);
+        linea2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        linea2.setHorizontalAlignment(SwingConstants.CENTER);
 
         linea3 = new JLabel("Sedan de Lujo");
         linea3.setPreferredSize(new Dimension(200, 200));
         linea3.setOpaque(true);
         linea3.setBackground(Color.LIGHT_GRAY);
+        linea3.setForeground(Color.BLACK);
+        linea3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        linea3.setHorizontalAlignment(SwingConstants.CENTER);
 
         gbc2.gridx = 0;
         gbc2.gridy = 0;
@@ -150,8 +165,19 @@ public class JFrameOne extends JFrame {
         gbc3.fill = GridBagConstraints.BOTH;
 
         material1 = new JLabel();
+        material1.setPreferredSize(new Dimension(250,50));
+        material1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        material1.setHorizontalAlignment(SwingConstants.CENTER);
+        
         material2 = new JLabel();
+        material2.setPreferredSize(new Dimension(250, 50));
+        material2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        material2.setHorizontalAlignment(SwingConstants.CENTER);
+
         material3 = new JLabel();
+        material3.setPreferredSize(new Dimension(250, 50));
+        material3.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        material3.setHorizontalAlignment(SwingConstants.CENTER);
 
         gbc3.gridx = 0;
         gbc3.gridy = 0;
@@ -181,6 +207,7 @@ public class JFrameOne extends JFrame {
         basurero.setOpaque(true);
         basurero.setBackground(Color.LIGHT_GRAY);
         basurero.setHorizontalAlignment(JLabel.CENTER);
+        ImageIcon basureroIcon = new ImageIcon(basura_icono.png);
         add(basurero, BorderLayout.EAST);
         
         
@@ -306,57 +333,43 @@ public class JFrameOne extends JFrame {
         });
         
         //Acciones para el drop
-
-       
         zonaBasurero = new ZonaBasurero(cintaTransportadora1);
         basurero.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
                 if (materialArrastrar != null) {
                     zonaBasurero.desecharMaterial(materialArrastrar);
                     materialArrastrar = null;
-
-                    // Actualizamos la lista y los labels
-                    actual = lista.getcabeza(); // Reiniciar el puntero
-
-                    if (actual != null) {
-                        material1.setText(actual.getMaterial().getNombre());
-                    }
-                    if (actual != null && actual.siguiente != null) {
-                        material2.setText(actual.siguiente.getMaterial().getNombre());
-                    }
-                    if (actual != null && actual.siguiente != null && actual.siguiente.siguiente != null) {
-                        material3.setText(actual.siguiente.siguiente.getMaterial().getNombre());
-                    }
+                    actualizarMateriales();
                 }
             }
         });
-       
+
         //ESTA ZONA ES SOLO DE PRUEBA PARA INICIAR 3 AUTOS AUTOMATICAMENTE SIN PEDIDOS
-        zonaConstruccion.iniciarVehiculo("Sedan de Lujo",0);
-        zonaConstruccion.iniciarVehiculo("Pick-up de alta gama",1);
-        zonaConstruccion.iniciarVehiculo("Sedan de Lujo",2);
+        zonaConstruccion.iniciarVehiculo("Sedan de Lujo", 0);
+        zonaConstruccion.iniciarVehiculo("Pick-up de alta gama", 1);
+        zonaConstruccion.iniciarVehiculo("Sedan de Lujo", 2);
     }
-    
-    private void actualizarMateriales(){
+
+    private void actualizarMateriales() {
         actual = lista.getcabeza();
 
-    if (actual != null) {
-        material1.setText(actual.getMaterial().getNombre());
-    } else {
-        material1.setText("");
-    }
+        if (actual != null) {
+            material1.setText(actual.getMaterial().getNombre());
+        } else {
+            material1.setText("");
+        }
 
-    if (actual != null && actual.siguiente != null) {
-        material2.setText(actual.siguiente.getMaterial().getNombre());
-    } else {
-        material2.setText("");
-    }
+        if (actual != null && actual.siguiente != null) {
+            material2.setText(actual.siguiente.getMaterial().getNombre());
+        } else {
+            material2.setText("");
+        }
 
-    if (actual != null && actual.siguiente != null && actual.siguiente.siguiente != null) {
-        material3.setText(actual.siguiente.siguiente.getMaterial().getNombre());
-    } else {
-        material3.setText("");
-    }
+        if (actual != null && actual.siguiente != null && actual.siguiente.siguiente != null) {
+            material3.setText(actual.siguiente.siguiente.getMaterial().getNombre());
+        } else {
+            material3.setText("");
+        }
     }
     
 
