@@ -65,5 +65,6 @@ public class cintaTransportadora {// Inicio de la clase
         material.limpiar();
         rellenarCinta();
     }
-
+    
+    
 }//Fin de la clase
