@@ -33,7 +33,7 @@ public class JFrameOne extends JFrame {
     //Obtenemos lista de cintraTransportadora 
     ListaMateriales lista = cintaTransportadora1.getMateriales();
     NodoMaterial actual = lista.getcabeza();
-
+    
     //Contador para la lista, de esta manera reemplazamos los materiales con el siguente de la lista
     //Debemos desarollar para que contador se utilize para hacer el recorrido de la lista.
     //Ejemplo tras escoger el material 1 y colocarlo en la linea de produccion o basura que esta sea ahora el espacio 3 
@@ -49,8 +49,13 @@ public class JFrameOne extends JFrame {
     private JLabel linea2;
     private JLabel linea3;
     private JLabel basurero;
+    private JLabel material1;
+    private JLabel material2;
+    private JLabel material3;
+    
     //Hacemos variable global para el drag
     private material materialArrastrar = null;
+    private cintaTransportadora cinta;
     
     public JFrameOne() {
         //initialize();
@@ -144,9 +149,9 @@ public class JFrameOne extends JFrame {
         gbc3.insets = new Insets(30, 30, 30, 30);
         gbc3.fill = GridBagConstraints.BOTH;
 
-        JLabel material1 = new JLabel();
-        JLabel material2 = new JLabel();
-        JLabel material3 = new JLabel();
+        material1 = new JLabel();
+        material2 = new JLabel();
+        material3 = new JLabel();
 
         gbc3.gridx = 0;
         gbc3.gridy = 0;
@@ -214,7 +219,7 @@ public class JFrameOne extends JFrame {
                     if (usado) {
                         linea1.setText("✔ " + materialArrastrar.getNombre());
                         cintaTransportadora1.eliminarMaterial(materialArrastrar);
-
+                        actualizarMateriales();
                         if (zonaConstruccion.getLinea(0).getVehiculo() == null) {
                             linea1.setText("Vehículo terminado + $ganancia");
                             new javax.swing.Timer(5000, ev -> {
@@ -245,7 +250,7 @@ public class JFrameOne extends JFrame {
                     if (usado) {
                         linea2.setText("✔ " + materialArrastrar.getNombre());
                         cintaTransportadora1.eliminarMaterial(materialArrastrar);
-
+                        actualizarMateriales();
                         if (zonaConstruccion.getLinea(1).getVehiculo() == null) {
                             linea2.setText("Vehículo terminado + $ganancia");
                             new javax.swing.Timer(5000, ev -> {
@@ -276,7 +281,7 @@ public class JFrameOne extends JFrame {
                     if (usado) {
                         linea3.setText("✔ " + materialArrastrar.getNombre());
                         cintaTransportadora1.eliminarMaterial(materialArrastrar);
-
+                        actualizarMateriales();
                         if (zonaConstruccion.getLinea(2).getVehiculo() == null) {
                             linea3.setText("Vehículo terminado + $ganancia");
                             new javax.swing.Timer(5000, ev -> {
@@ -325,11 +330,33 @@ public class JFrameOne extends JFrame {
                 }
             }
         });
-
+       
         //ESTA ZONA ES SOLO DE PRUEBA PARA INICIAR 3 AUTOS AUTOMATICAMENTE SIN PEDIDOS
         zonaConstruccion.iniciarVehiculo("Sedan de Lujo",0);
         zonaConstruccion.iniciarVehiculo("Pick-up de alta gama",1);
         zonaConstruccion.iniciarVehiculo("Sedan de Lujo",2);
+    }
+    
+    private void actualizarMateriales(){
+        actual = lista.getcabeza();
+
+    if (actual != null) {
+        material1.setText(actual.getMaterial().getNombre());
+    } else {
+        material1.setText("");
+    }
+
+    if (actual != null && actual.siguiente != null) {
+        material2.setText(actual.siguiente.getMaterial().getNombre());
+    } else {
+        material2.setText("");
+    }
+
+    if (actual != null && actual.siguiente != null && actual.siguiente.siguiente != null) {
+        material3.setText(actual.siguiente.siguiente.getMaterial().getNombre());
+    } else {
+        material3.setText("");
+    }
     }
     
 
