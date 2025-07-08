@@ -9,5 +9,49 @@ package carfactory.fide;
  * @author jerse
  */
 public class lineaProduccion {//Inicio de clase
-    
-}//Fin de la clase
+
+    private Vehiculo vehiculo;
+
+    public lineaProduccion() {
+        this.vehiculo = null;
+    }
+
+    public boolean estaLibre() {
+        return vehiculo == null;
+    }
+
+    public boolean iniciarConstruccion(String tipo) {
+        if (!estaLibre()) {
+            return false;
+        }
+
+        switch (tipo) {
+            case "Sedan de Lujo":
+                vehiculo = new Vehiculo("Sedan de Lujo", 5000);
+                break;
+            case "Pick-up de alta gama":
+                vehiculo = new Vehiculo("Pick-up de alta gama", 12000);
+                break;
+            default:
+                return false;
+        }
+        return true;
+    }
+
+    public boolean agregarMaterial(material m) {
+        if (vehiculo == null) {
+            return false;
+        }
+
+        boolean usado = vehiculo.recibirMaterial(m);
+        if (vehiculo.estaCompleto()) {
+            System.out.println("Vehiculo " + vehiculo.getTipo() + " completado. Ganancia: $" + vehiculo.getGanancia());
+            vehiculo = null;
+        }
+        return usado;
+    }
+
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+} //Fin de la clase

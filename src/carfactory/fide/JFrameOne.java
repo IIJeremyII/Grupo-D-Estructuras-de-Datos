@@ -28,7 +28,8 @@ public class JFrameOne extends JFrame {
 
     //Lista de materiales
     private cintaTransportadora cintaTransportadora1 = new cintaTransportadora(10);
-
+    private ZonaConstruccion zonaConstruccion  = new ZonaConstruccion();
+    private ZonaBasurero zonaBasurero;
     //Obtenemos lista de cintraTransportadora 
     ListaMateriales lista = cintaTransportadora1.getMateriales();
     NodoMaterial actual = lista.getcabeza();
@@ -44,10 +45,13 @@ public class JFrameOne extends JFrame {
     //
     //
     private int contador = 0;
-
+    private JLabel linea1;
+    private JLabel linea2;
+    private JLabel linea3;
+    private JLabel basurero;
     //Hacemos variable global para el drag
     private material materialArrastrar = null;
-
+    
     public JFrameOne() {
         //initialize();
 
@@ -104,22 +108,20 @@ public class JFrameOne extends JFrame {
         gbc2.insets = new Insets(10, 10, 10, 10);
         gbc2.fill = GridBagConstraints.BOTH;
 
-        JLabel linea1 = new JLabel("Arrastramos aqui el material");
-        //Preferred size damos la dimesion 200 por 200 pixeles
+        
+
+        linea1 = new JLabel("Sedan de Lujo");
         linea1.setPreferredSize(new Dimension(200, 200));
-        //Hacemos que sea opaco y colocamos un color de fondo
         linea1.setOpaque(true);
         linea1.setBackground(Color.LIGHT_GRAY);
 
-        JLabel linea2 = new JLabel("Arrastramos aqui el material");
+        linea2 = new JLabel("Pick-up de alta gama");
         linea2.setPreferredSize(new Dimension(200, 200));
-        //Hacemos que sea opaco y colocamos un color de fondo
         linea2.setOpaque(true);
         linea2.setBackground(Color.LIGHT_GRAY);
 
-        JLabel linea3 = new JLabel("Arrastramos aqui el material");
+        linea3 = new JLabel("Sedan de Lujo");
         linea3.setPreferredSize(new Dimension(200, 200));
-        //Hacemos que sea opaco y colocamos un color de fondo
         linea3.setOpaque(true);
         linea3.setBackground(Color.LIGHT_GRAY);
 
@@ -169,6 +171,15 @@ public class JFrameOne extends JFrame {
 
         add(panelMateriales, BorderLayout.SOUTH);
 
+        basurero = new JLabel("Basurero");
+        basurero.setPreferredSize(new Dimension(200, 200));
+        basurero.setOpaque(true);
+        basurero.setBackground(Color.LIGHT_GRAY);
+        basurero.setHorizontalAlignment(JLabel.CENTER);
+        add(basurero, BorderLayout.EAST);
+        
+        
+        
         //Acciones para el drag and drop usando variable global
         material1.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
@@ -196,37 +207,131 @@ public class JFrameOne extends JFrame {
                 }
             }
         });
-
-        //Acciones para el drop
         linea1.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
                 if (materialArrastrar != null) {
-                    linea1.setText(materialArrastrar.getNombre());
-                    materialArrastrar = null;
-                }
-            }
-        });
-        
-        //Igual lo hacemos para las 3 lineas
-        linea2.addMouseListener(new MouseAdapter() {
-            public void mouseReleased(MouseEvent e) {
-                if (materialArrastrar != null) {
-                    linea2.setText(materialArrastrar.getNombre());
-                    materialArrastrar = null;
-                }
-            }
-        });
-        
-        linea3.addMouseListener(new MouseAdapter() {
-            public void mouseReleased(MouseEvent e) {
-                if (materialArrastrar != null) {
-                    linea3.setText(materialArrastrar.getNombre());
+                    boolean usado = zonaConstruccion.usarMaterialEnLinea(0, materialArrastrar);
+                    if (usado) {
+                        linea1.setText("✔ " + materialArrastrar.getNombre());
+                        cintaTransportadora1.eliminarMaterial(materialArrastrar);
+
+                        if (zonaConstruccion.getLinea(0).getVehiculo() == null) {
+                            linea1.setText("Vehículo terminado + $ganancia");
+                            new javax.swing.Timer(5000, ev -> {
+                                linea1.setText("Sin vehículo");
+                            }).start();
+                        } else {
+                            new javax.swing.Timer(5000, ev -> {
+                                Vehiculo v = zonaConstruccion.getLinea(0).getVehiculo();
+                                linea1.setText(v != null ? v.getTipo() : "Sin vehículo");
+                            }).start();
+                        }
+                    } else {
+                        linea1.setText("✖ " + materialArrastrar.getNombre());
+                        new javax.swing.Timer(5000, ev -> {
+                            Vehiculo v = zonaConstruccion.getLinea(0).getVehiculo();
+                            linea1.setText(v != null ? v.getTipo() : "Sin vehículo");
+                        }).start();
+                    }
                     materialArrastrar = null;
                 }
             }
         });
 
+        linea2.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (materialArrastrar != null) {
+                    boolean usado = zonaConstruccion.usarMaterialEnLinea(1, materialArrastrar);
+                    if (usado) {
+                        linea2.setText("✔ " + materialArrastrar.getNombre());
+                        cintaTransportadora1.eliminarMaterial(materialArrastrar);
+
+                        if (zonaConstruccion.getLinea(1).getVehiculo() == null) {
+                            linea2.setText("Vehículo terminado + $ganancia");
+                            new javax.swing.Timer(5000, ev -> {
+                                linea2.setText("Sin vehículo");
+                            }).start();
+                        } else {
+                            new javax.swing.Timer(5000, ev -> {
+                                Vehiculo v = zonaConstruccion.getLinea(1).getVehiculo();
+                                linea2.setText(v != null ? v.getTipo() : "Sin vehículo");
+                            }).start();
+                        }
+                    } else {
+                        linea2.setText("✖ " + materialArrastrar.getNombre());
+                        new javax.swing.Timer(5000, ev -> {
+                            Vehiculo v = zonaConstruccion.getLinea(1).getVehiculo();
+                            linea2.setText(v != null ? v.getTipo() : "Sin vehículo");
+                        }).start();
+                    }
+                    materialArrastrar = null;
+                }
+            }
+        });
+
+        linea3.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (materialArrastrar != null) {
+                    boolean usado = zonaConstruccion.usarMaterialEnLinea(2, materialArrastrar);
+                    if (usado) {
+                        linea3.setText("✔ " + materialArrastrar.getNombre());
+                        cintaTransportadora1.eliminarMaterial(materialArrastrar);
+
+                        if (zonaConstruccion.getLinea(2).getVehiculo() == null) {
+                            linea3.setText("Vehículo terminado + $ganancia");
+                            new javax.swing.Timer(5000, ev -> {
+                                linea3.setText("Sin vehículo");
+                            }).start();
+                        } else {
+                            new javax.swing.Timer(5000, ev -> {
+                                Vehiculo v = zonaConstruccion.getLinea(2).getVehiculo();
+                                linea3.setText(v != null ? v.getTipo() : "Sin vehículo");
+                            }).start();
+                        }
+                    } else {
+                        linea3.setText("✖ " + materialArrastrar.getNombre());
+                        new javax.swing.Timer(5000, ev -> {
+                            Vehiculo v = zonaConstruccion.getLinea(2).getVehiculo();
+                            linea3.setText(v != null ? v.getTipo() : "Sin vehículo");
+                        }).start();
+                    }
+                    materialArrastrar = null;
+                }
+            }
+        });
+        
+        //Acciones para el drop
+
+       
+        zonaBasurero = new ZonaBasurero(cintaTransportadora1);
+        basurero.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (materialArrastrar != null) {
+                    zonaBasurero.desecharMaterial(materialArrastrar);
+                    materialArrastrar = null;
+
+                    // Actualizamos la lista y los labels
+                    actual = lista.getcabeza(); // Reiniciar el puntero
+
+                    if (actual != null) {
+                        material1.setText(actual.getMaterial().getNombre());
+                    }
+                    if (actual != null && actual.siguiente != null) {
+                        material2.setText(actual.siguiente.getMaterial().getNombre());
+                    }
+                    if (actual != null && actual.siguiente != null && actual.siguiente.siguiente != null) {
+                        material3.setText(actual.siguiente.siguiente.getMaterial().getNombre());
+                    }
+                }
+            }
+        });
+
+        //ESTA ZONA ES SOLO DE PRUEBA PARA INICIAR 3 AUTOS AUTOMATICAMENTE SIN PEDIDOS
+        zonaConstruccion.iniciarVehiculo("Sedan de Lujo",0);
+        zonaConstruccion.iniciarVehiculo("Pick-up de alta gama",1);
+        zonaConstruccion.iniciarVehiculo("Sedan de Lujo",2);
     }
+    
 
     /*
     private void initialize() {
