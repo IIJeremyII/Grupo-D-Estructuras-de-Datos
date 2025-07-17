@@ -1,0 +1,1 @@
+Implementación de la interfaz grafica pero no funciono, volví los archivos a como estaban porque los cambios no funcionaban. Mañana seguiré probando.
