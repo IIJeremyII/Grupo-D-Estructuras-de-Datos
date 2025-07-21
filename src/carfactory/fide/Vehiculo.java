@@ -18,7 +18,8 @@ public class Vehiculo {//Inicio
         this.tipo = tipo;
         this.ganancia = ganancia;
         this.materialesNecesarios = new ListaMateriales();
-
+        
+        
         switch (tipo) {
             case "Sedan de Lujo":
                 materialesNecesarios.agregar(new material("Motor de lujo", 500));
@@ -27,6 +28,16 @@ public class Vehiculo {//Inicio
             case "Pick-up de alta gama":
                 materialesNecesarios.agregar(new material("Motor de lujo", 500));
                 materialesNecesarios.agregar(new material("Carroceria", 500));
+                break;
+            case "Maquinaria de alta gama para trabajos pesados":
+                materialesNecesarios.agregar(new material("Motor especial deportivo", 2000));
+                materialesNecesarios.agregar(new material("Carroceria especial", 800));
+                materialesNecesarios.agregar(new material("Llantas unicas de trabajo", 800));
+                break;
+            case "Superauto Deportivo":
+                materialesNecesarios.agregar(new material("Motor especial deportivo", 2000));
+                materialesNecesarios.agregar(new material("Carroceria", 500));
+                materialesNecesarios.agregar(new material("Llantas deportivas", 2000));
                 break;
         }
     }

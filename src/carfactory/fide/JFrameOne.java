@@ -207,7 +207,7 @@ public class JFrameOne extends JFrame {
         basurero.setOpaque(true);
         basurero.setBackground(Color.LIGHT_GRAY);
         basurero.setHorizontalAlignment(JLabel.CENTER);
-        ImageIcon basureroIcon = new ImageIcon(basura_icono.png);
+       // ImageIcon basureroIcon = new ImageIcon(basura_icono.png);
         add(basurero, BorderLayout.EAST);
         
         
