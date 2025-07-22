@@ -4,9 +4,10 @@
  */
 package carfactory.fide;
 
-import carfactory.fide.Vehiculo;
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.Timer;
+
 /**
  *
  * @author AMD
@@ -23,7 +24,14 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
     private cintaTransportadora cintaTransportadora1 = new cintaTransportadora(10);
     private ZonaConstruccion zonaConstruccion = new ZonaConstruccion();
     private LineaPedidos lineaPedidos = new LineaPedidos();
-
+    private Vehiculo pedidoEnLinea1 = null;
+    private final String DEFAULT_LINEA1 = "Linea 1";
+    private Vehiculo pedidoEnLinea2 = null;
+    private final String DEFAULT_LINEA2 = "Linea 2";
+    private Vehiculo pedidoEnLinea3 = null;
+    private final String DEFAULT_LINEA3 = "Linea 3";
+    
+    
     //Obtenemos lista de cintraTransportadora 
     ListaMateriales lista = cintaTransportadora1.getMateriales();
     NodoMaterial actual = lista.getcabeza();
@@ -36,6 +44,7 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
     private material materialArrastrar = null;
     private Vehiculo vehiculoArrastrar = null;
     private cintaTransportadora cinta;
+    
 
     public Nivel1Interfaz() {
         initComponents();
@@ -61,9 +70,9 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         pedido1 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        pedido2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        pedido3 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         linea1 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
@@ -200,15 +209,17 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pedido1, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pedido1, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))
         );
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel6.setText(actualVehiculo.getSiguiente().getVehiculo().getTipo());
-        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+        pedido2.setText(actualVehiculo.getSiguiente().getVehiculo().getTipo());
+        pedido2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel6MousePressed(evt);
+                pedido2MousePressed(evt);
             }
         });
 
@@ -216,22 +227,24 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addComponent(pedido2, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pedido2, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))
         );
 
         jPanel7.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel7.setText(actualVehiculo.getSiguiente().getSiguiente().getSiguiente().getVehiculo().getTipo());
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        pedido3.setText(actualVehiculo.getSiguiente().getSiguiente().getSiguiente().getVehiculo().getTipo());
+        pedido3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jLabel7MousePressed(evt);
+                pedido3MousePressed(evt);
             }
         });
 
@@ -239,16 +252,16 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pedido3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(pedido3, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE))
         );
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
@@ -318,11 +331,17 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(linea3, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(linea3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(linea3, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(linea3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -342,19 +361,16 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(basurero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(15, 15, 15)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(132, Short.MAX_VALUE))))
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addComponent(basurero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -433,62 +449,154 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
         jPanel7.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }//GEN-LAST:event_pedido1MousePressed
 
-    private void jLabel6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MousePressed
+    private void pedido2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pedido2MousePressed
         if (actualVehiculo != null) {
             vehiculoArrastrar = actualVehiculo.getSiguiente().getVehiculo();
         }
         jPanel5.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         jPanel6.setBorder(BorderFactory.createLineBorder(Color.BLUE));
         jPanel7.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-    }//GEN-LAST:event_jLabel6MousePressed
+    }//GEN-LAST:event_pedido2MousePressed
 
-    private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
+    private void pedido3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pedido3MousePressed
         if (actualVehiculo != null) {
             vehiculoArrastrar = actualVehiculo.getSiguiente().getSiguiente().getVehiculo();
         }
         jPanel5.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         jPanel6.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         jPanel7.setBorder(BorderFactory.createLineBorder(Color.BLUE));
-    }//GEN-LAST:event_jLabel7MousePressed
+    }//GEN-LAST:event_pedido3MousePressed
 
     private void linea1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linea1MouseReleased
-        linea1.setText(actualVehiculo.getSiguiente().getVehiculo().getTipo());
+    if (pedidoEnLinea1 == null){
+        pedidoEnLinea1 = lineaPedidos.obtenerSiguientePedido();
+        actualizarPedidos();
+        if(pedidoEnLinea1!=null){
+            linea1.setText(pedidoEnLinea1.getTipo());
+            zonaConstruccion.iniciarVehiculo(pedidoEnLinea1.getTipo(),0);
+        }else {
+            linea1.setText(DEFAULT_LINEA1);
+        }
+        return;
+    }
+    if (materialArrastrar != null){
+        final String textoBase = pedidoEnLinea1.getTipo();
+        boolean usado = zonaConstruccion.usarMaterialEnLinea(0,materialArrastrar);
         
-        if (materialArrastrar != null) {
-            final String baseText = linea1.getText();
-            boolean usado = zonaConstruccion.usarMaterialEnLinea(0, materialArrastrar);
-            if (usado) {
-                linea1.setText("✔ " + materialArrastrar.getNombre());
-                cintaTransportadora1.eliminarMaterial(materialArrastrar);
-                actualizarMateriales();
+        if (usado){
+            linea1.setText("✔ " + materialArrastrar.getNombre());
+            cintaTransportadora1.eliminarMaterial(materialArrastrar);
+            actualizarMateriales();
+        }else {
+            linea1.setText("✖ " + materialArrastrar.getNombre());
+        }
+        materialArrastrar = null;
+        
+            Timer t = new Timer(3000, e -> {
                 if (zonaConstruccion.getLinea(0).getVehiculo() == null) {
-                    linea1.setText("Vehículo terminado + $ganancia");
-                    new javax.swing.Timer(5000, ev -> {
-                        linea1.setText(actualVehic);
+                    linea1.setText("Vehiculo completo");
+                    new Timer(3000, ev2 -> {
+                        linea1.setText(DEFAULT_LINEA1);
+                        pedidoEnLinea1 = null;
+                        actualizarPedidos();
+                        ((Timer) ev2.getSource()).stop();
                     }).start();
                 } else {
-                    new javax.swing.Timer(5000, ev -> {
-                        Vehiculo v = zonaConstruccion.getLinea(0).getVehiculo();
-                        linea1.setText(v != null ? v.getTipo() : "Linea 1");
-                    }).start();
+                    linea1.setText(textoBase);
                 }
-            } else {
-                linea1.setText("✖ " + materialArrastrar.getNombre());
-                new javax.swing.Timer(5000, ev -> {
-                    Vehiculo v = zonaConstruccion.getLinea(0).getVehiculo();
-                    linea1.setText(v != null ? v.getTipo() : "Linea 1");
-                }).start();
-            }
-            materialArrastrar = null;
+                ((Timer) e.getSource()).stop();
+            });
+            t.setRepeats(false);
+            t.start();
         }
     }//GEN-LAST:event_linea1MouseReleased
 
     private void linea2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linea2MouseReleased
-        linea2.setText(actualVehiculo.getSiguiente().getVehiculo().getTipo());
+       if (pedidoEnLinea2 == null){
+        pedidoEnLinea2 = lineaPedidos.obtenerSiguientePedido();
+        actualizarPedidos();
+        if(pedidoEnLinea2!=null){
+            linea2.setText(pedidoEnLinea2.getTipo());
+            zonaConstruccion.iniciarVehiculo(pedidoEnLinea2.getTipo(),1);
+        }else {
+            linea2.setText(DEFAULT_LINEA2);
+        }
+        return;
+    }
+    if (materialArrastrar != null){
+        final String textoBase = pedidoEnLinea2.getTipo();
+        boolean usado = zonaConstruccion.usarMaterialEnLinea(1,materialArrastrar);
+        
+        if (usado){
+            linea2.setText("✔ " + materialArrastrar.getNombre());
+            cintaTransportadora1.eliminarMaterial(materialArrastrar);
+            actualizarMateriales();
+        }else {
+            linea2.setText("✖ " + materialArrastrar.getNombre());
+        }
+        materialArrastrar = null;
+        
+            Timer t = new Timer(3000, e -> {
+                if (zonaConstruccion.getLinea(1).getVehiculo() == null) {
+                    linea2.setText("Vehiculo completo");
+                    new Timer(3000, ev2 -> {
+                        linea2.setText(DEFAULT_LINEA1);
+                        pedidoEnLinea2 = null;
+                        actualizarPedidos();
+                        ((Timer) ev2.getSource()).stop();
+                    }).start();
+                } else {
+                    linea2.setText(textoBase);
+                }
+                ((Timer) e.getSource()).stop();
+            });
+            t.setRepeats(false);
+            t.start();
+        }
     }//GEN-LAST:event_linea2MouseReleased
 
     private void linea3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_linea3MouseReleased
-        linea3.setText(actualVehiculo.getSiguiente().getSiguiente().getVehiculo().getTipo());
+        if (pedidoEnLinea3 == null){
+        pedidoEnLinea3 = lineaPedidos.obtenerSiguientePedido();
+        actualizarPedidos();
+        if(pedidoEnLinea3!=null){
+            linea3.setText(pedidoEnLinea3.getTipo());
+            zonaConstruccion.iniciarVehiculo(pedidoEnLinea3.getTipo(),2);
+        }else {
+            linea3.setText(DEFAULT_LINEA3);
+        }
+        return;
+    }
+    if (materialArrastrar != null){
+        final String textoBase = pedidoEnLinea3.getTipo();
+        boolean usado = zonaConstruccion.usarMaterialEnLinea(2,materialArrastrar);
+        
+        if (usado){
+            linea3.setText("✔ " + materialArrastrar.getNombre());
+            cintaTransportadora1.eliminarMaterial(materialArrastrar);
+            actualizarMateriales();
+        }else {
+            linea3.setText("✖ " + materialArrastrar.getNombre());
+        }
+        materialArrastrar = null;
+        
+            Timer t = new Timer(3000, e -> {
+                if (zonaConstruccion.getLinea(2).getVehiculo() == null) {
+                    linea3.setText("Vehiculo completo");
+                    new Timer(3000, ev2 -> {
+                        linea3.setText(DEFAULT_LINEA1);
+                        pedidoEnLinea3 = null;
+                        actualizarPedidos();
+                        ((Timer) ev2.getSource()).stop();
+                    }).start();
+                } else {
+                    linea3.setText(textoBase);
+                }
+                ((Timer) e.getSource()).stop();
+            });
+            t.setRepeats(false);
+            t.start();
+        }
     }//GEN-LAST:event_linea3MouseReleased
 
     private void actualizarMateriales() {
@@ -527,6 +635,32 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
             material3.setText("");
         }
     }
+    
+    private void actualizarPedidos(){
+        NodoVehiculo nodo = lineaPedidos.getLista().getCabeza();
+        
+        //Pedido 1
+        if (nodo!=null){
+            pedido1.setText(nodo.vehiculo.getTipo());
+        } else {
+            pedido1.setText("");
+        }
+        
+        //Pedido 2
+        if (nodo != null && nodo.siguiente != null){
+            pedido2.setText(nodo.siguiente.vehiculo.getTipo());
+        } else {
+            pedido2.setText("");
+        }
+        
+        //Pedido 3
+        if (nodo != null && nodo.siguiente != null && nodo.siguiente.siguiente != null){
+            pedido3.setText(nodo.siguiente.siguiente.vehiculo.getTipo());
+        } else {
+            pedido3.setText("");
+        }
+        
+    }
 
     /**
      * @param args the command line arguments
@@ -562,12 +696,12 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
             }
         });
     }
+    
+    
     private int contador = 0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel basurero;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -584,5 +718,7 @@ public class Nivel1Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel material2;
     private javax.swing.JLabel material3;
     private javax.swing.JLabel pedido1;
+    private javax.swing.JLabel pedido2;
+    private javax.swing.JLabel pedido3;
     // End of variables declaration//GEN-END:variables
 }

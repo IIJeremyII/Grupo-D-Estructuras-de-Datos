@@ -32,6 +32,12 @@ public class lineaProduccion {//Inicio de clase
             case "Pick-up de alta gama":
                 vehiculo = new Vehiculo("Pick-up de alta gama", 12000);
                 break;
+            case "Maquinaria de alta gama para trabajos pesados":
+                vehiculo = new Vehiculo("Maquinaria de alta gama para trabajos pesados", 17500);
+                break;
+            case "Superauto Deportivo":
+                vehiculo = new Vehiculo("Superauto Deportivo", 20000);
+                break;    
             default:
                 return false;
         }
