@@ -2,37 +2,31 @@ package carfactory.fide;
 
 public class EconomiaJuego {
 
-    private int ganancias;
-    private int perdidas;
+    private int ganancia;
+    private int perdida;
 
     public EconomiaJuego() {
-        this.ganancias = 0;
-        this.perdidas = 0;
+        this.ganancia = 0;
+        this.perdida = 0;
     }
 
-    public void sumarGanancia(int cantidad) {
-        ganancias += cantidad;
+    public void ganar(int monto) {
+        ganancia += monto;
     }
 
-    public void sumarPerdida(int cantidad) {
-        perdidas += cantidad;
+    public void perder(int monto) {
+        perdida += monto;
     }
 
-    public int getGanancias() {
-        return ganancias;
+    public int getGanancia() {
+        return ganancia;
     }
 
-    public int getPerdidas() {
-        return perdidas;
+    public int getPerdida() {
+        return perdida;
     }
 
-    public int getSaldo() {
-        return ganancias - perdidas;
-    }
-
-    public String obtenerResumen() {
-        return "Ganancias: $" + ganancias +
-               " | Pérdidas: $" + perdidas +
-               " | Saldo: $" + getSaldo();
+    public int getGananciaTotal() {
+        return ganancia - perdida;
     }
 }
