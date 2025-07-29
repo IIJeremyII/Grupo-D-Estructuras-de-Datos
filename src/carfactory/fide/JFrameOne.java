@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package carfactory.fide;
+/* package carfactory.fide;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,7 +30,7 @@ import javax.swing.ImageIcon;
  *
  * @author jeremy.segura
  */
-public class JFrameOne extends JFrame {
+/*public class JFrameOne extends JFrame {
 
     //Lista de materiales
     private cintaTransportadora cintaTransportadora1 = new cintaTransportadora(10);
@@ -350,7 +350,7 @@ public class JFrameOne extends JFrame {
         zonaConstruccion.iniciarVehiculo("Sedan de Lujo", 2);
     }
 
-    private void actualizarMateriales() {
+/*    private void actualizarMateriales() {
         actual = lista.getcabeza();
 
         if (actual != null) {
@@ -370,7 +370,7 @@ public class JFrameOne extends JFrame {
         } else {
             material3.setText("");
         }
-    }
+    }*/
     
 
     /*
@@ -382,4 +382,4 @@ public class JFrameOne extends JFrame {
         setVisible(true); 
     } 
      */
-}
+
