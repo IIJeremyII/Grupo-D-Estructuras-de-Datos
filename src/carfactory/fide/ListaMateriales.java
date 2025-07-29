@@ -52,4 +52,8 @@ public class ListaMateriales {//Find
         tamano = 0;
     }
 
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
+    }
+
 }//Fin de la clase

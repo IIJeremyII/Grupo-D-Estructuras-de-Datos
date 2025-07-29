@@ -18,8 +18,7 @@ public class Vehiculo {//Inicio
         this.tipo = tipo;
         this.ganancia = ganancia;
         this.materialesNecesarios = new ListaMateriales();
-        
-        
+
         switch (tipo) {
             case "Sedan de Lujo":
                 materialesNecesarios.agregar(new material("Motor de lujo", 500));
@@ -50,9 +49,10 @@ public class Vehiculo {//Inicio
             if (actual.material.getNombre().equals(m.getNombre())) {
                 if (anterior == null) {
                     materialesNecesarios.eliminarPrimero();
+                    
                 } else {
                     anterior.siguiente = actual.siguiente;
-       //             materialesNecesarios.getTamano--;
+                    //             materialesNecesarios.getTamano--;
                 }
                 return true;
             }
@@ -63,7 +63,10 @@ public class Vehiculo {//Inicio
     }
 
     public boolean estaCompleto() {
-        return materialesNecesarios.getTamano() == 0;
+        if (materialesNecesarios.getTamano() == 0) {
+            return true;
+        }
+        return false;
     }
 
     public int getGanancia() {
