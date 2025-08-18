@@ -10,71 +10,34 @@ package carfactory.fide;
  */
 public class Vehiculo {//Inicio
 
-    private String tipo;
-    private int ganancia;
-    private ListaMateriales materialesNecesarios;
+    private String nombre;
+    private ListaMateriales materialesRequeridos;
+    private double gananciaUnidad;
 
-    public Vehiculo(String tipo, int ganancia) {
-        this.tipo = tipo;
-        this.ganancia = ganancia;
-        this.materialesNecesarios = new ListaMateriales();
+    public Vehiculo(String nombre, ListaMateriales materialesRequeridos, double gananciaUnidad) {
+        this.nombre = nombre;
+        this.materialesRequeridos = materialesRequeridos;
+        this.gananciaUnidad = gananciaUnidad;
+    }
 
-        switch (tipo) {
-            case "Sedan de Lujo":
-                materialesNecesarios.agregar(new material("Motor de lujo", 500));
-                materialesNecesarios.agregar(new material("Carroceria", 500));
-                break;
-            case "Pick-up de alta gama":
-                materialesNecesarios.agregar(new material("Motor de lujo", 500));
-                materialesNecesarios.agregar(new material("Carroceria", 500));
-                break;
-            case "Maquinaria de alta gama para trabajos pesados":
-                materialesNecesarios.agregar(new material("Motor especial deportivo", 2000));
-                materialesNecesarios.agregar(new material("Carroceria especial", 800));
-                materialesNecesarios.agregar(new material("Llantas unicas de trabajo", 800));
-                break;
-            case "Superauto Deportivo":
-                materialesNecesarios.agregar(new material("Motor especial deportivo", 2000));
-                materialesNecesarios.agregar(new material("Carroceria", 500));
-                materialesNecesarios.agregar(new material("Llantas deportivas", 2000));
-                break;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public ListaMateriales getMaterialesRequeridos() {
+        return materialesRequeridos;
+    }
+
+    public double getGananciaUnidad() {
+        return gananciaUnidad;
+    }
+
+    public double getCostoMateriales() {
+        double total = 0;
+        for (int i = 0; i < materialesRequeridos.tamano(); i++) {
+            total += materialesRequeridos.get(i).getValor();
         }
+        return total;
     }
-
-    public boolean recibirMaterial(material m) {
-        NodoMaterial actual = materialesNecesarios.getcabeza();
-        NodoMaterial anterior = null;
-
-        while (actual != null) {
-            if (actual.material.getNombre().equals(m.getNombre())) {
-                if (anterior == null) {
-                    materialesNecesarios.eliminarPrimero();
-                    
-                } else {
-                    anterior.siguiente = actual.siguiente;
-                    //             materialesNecesarios.getTamano--;
-                }
-                return true;
-            }
-            anterior = actual;
-            actual = actual.siguiente;
-        }
-        return false;
-    }
-
-    public boolean estaCompleto() {
-        if (materialesNecesarios.getTamano() == 0) {
-            return true;
-        }
-        return false;
-    }
-
-    public int getGanancia() {
-        return ganancia;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
+    
 }//Fin 

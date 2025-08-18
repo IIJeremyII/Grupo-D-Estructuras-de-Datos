@@ -9,30 +9,12 @@ package carfactory.fide;
  * @author jerse
  */
 public class NodoMaterial {
-
-    //Agregue getter and setters
-    material material;
+    
+    Material dato;
     NodoMaterial siguiente;
 
-    public NodoMaterial(material material) {
-        this.material = material;
-        this.siguiente = null;
+    NodoMaterial(Material d) {
+        this.dato = d;
     }
-
-    public material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(material material) {
-        this.material = material;
-    }
-
-    public NodoMaterial getSiguiente() {
-        return siguiente;
-    }
-
-    public void setSiguiente(NodoMaterial siguiente) {
-        this.siguiente = siguiente;
-    }
-
+    
 }

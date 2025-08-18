@@ -8,57 +8,84 @@ package carfactory.fide;
  *
  * @author jerse
  */
-public class lineaProduccion {//Inicio de clase
+public class LineaProduccion {//Inicio de clase
+    private Vehiculo vehiculoEnProceso;
+    private ListaMateriales materialesColocados;
 
-    private Vehiculo vehiculo;
-
-    public lineaProduccion() {
-        this.vehiculo = null;
+    public LineaProduccion() {
+        this.vehiculoEnProceso = null;
+        this.materialesColocados = new ListaMateriales();
     }
 
-    public boolean estaLibre() {
-        return vehiculo == null;
+    public boolean tieneVehiculo() {
+        return vehiculoEnProceso != null;
     }
 
-    public boolean iniciarConstruccion(String tipo) {
-        if (!estaLibre()) {
+    public Vehiculo getVehiculoEnProceso() {
+        return vehiculoEnProceso;
+    }
+
+    public ListaMateriales getMaterialesColocados() {
+        return materialesColocados;
+    }
+
+    public void iniciarPedido(Vehiculo v) {
+        if (tieneVehiculo()) {
+            throw new IllegalStateException("Linea ocupada");
+        }
+        this.vehiculoEnProceso = v;
+        this.materialesColocados.limpiar();
+    }
+
+    
+    public boolean puedeAceptarMaterial(Material m) {
+        if (!tieneVehiculo()) {
             return false;
         }
+        String nombre = m.getNombre();
+        int requeridos = vehiculoEnProceso.getMaterialesRequeridos().contarPorNombre(nombre);
+        if (requeridos == 0) {
+            return false; // no es parte del vehiculo
+        }
+        int yaColocados = materialesColocados.contarPorNombre(nombre);
+        return yaColocados < requeridos;
+    }
 
-        switch (tipo) {
-            case "Sedan de Lujo":
-                vehiculo = new Vehiculo("Sedan de Lujo", 5000);
-                break;
-            case "Pick-up de alta gama":
-                vehiculo = new Vehiculo("Pick-up de alta gama", 12000);
-                break;
-            case "Maquinaria de alta gama para trabajos pesados":
-                vehiculo = new Vehiculo("Maquinaria de alta gama para trabajos pesados", 17500);
-                break;
-            case "Superauto Deportivo":
-                vehiculo = new Vehiculo("Superauto Deportivo", 20000);
-                break;
-            default:
+   
+    public void colocarMaterial(Material m) {
+        if (!puedeAceptarMaterial(m)) {
+            throw new IllegalArgumentException("Material incorrecto o excedido");
+        }
+        materialesColocados.add(m);
+    }
+
+  
+    public boolean estaCompleto() {
+        if (!tieneVehiculo()) {
+            return false;
+        }
+        ListaMateriales req = vehiculoEnProceso.getMaterialesRequeridos();
+        // Para cada tipo requerido, verificar conteos
+        for (int i = 0; i < req.tamano(); i++) {
+            String nombre = req.get(i).getNombre();
+            int reqCnt = req.contarPorNombre(nombre);
+            int colCnt = materialesColocados.contarPorNombre(nombre);
+            if (colCnt < reqCnt) {
                 return false;
+            }
         }
         return true;
     }
 
-    public boolean agregarMaterial(material m) {
-        if (vehiculo == null) {
-            return false;
-        }
 
-        boolean usado = vehiculo.recibirMaterial(m);
-        if (vehiculo.estaCompleto()) {
-            System.out.println("Vehiculo " + vehiculo.getTipo() + " completado. Ganancia: $" + vehiculo.getGanancia());
-            vehiculo = null;
+    public Vehiculo finalizar() {
+        if (!estaCompleto()) {
+            throw new IllegalStateException("Materiales incompletos");
         }
-        return usado;
-    }
-
-    public Vehiculo getVehiculo() {
-        return vehiculo;
+        Vehiculo v = vehiculoEnProceso;
+        vehiculoEnProceso = null;
+        materialesColocados.limpiar();
+        return v;
     }
 } //Fin de la clase
 

@@ -4,34 +4,12 @@
  */
 package carfactory.fide;
 
-/**
- *
- * @author AMD
- */
 public class NodoVehiculo {
 
-    public Vehiculo vehiculo;
-    public NodoVehiculo siguiente;
+    Vehiculo dato;
+    NodoVehiculo siguiente;
 
-    public NodoVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
-        this.siguiente = null;
+    NodoVehiculo(Vehiculo d) {
+        this.dato = d;
     }
-
-    public Vehiculo getVehiculo() {
-        return vehiculo;
-    }
-
-    public void setVehiculo(Vehiculo vehiculo) {
-        this.vehiculo = vehiculo;
-    }
-
-    public NodoVehiculo getSiguiente() {
-        return siguiente;
-    }
-
-    public void setSiguiente(NodoVehiculo siguiente) {
-        this.siguiente = siguiente;
-    }
-
 }

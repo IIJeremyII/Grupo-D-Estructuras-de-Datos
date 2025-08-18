@@ -6,60 +6,46 @@ package carfactory.fide;
 
 /**
  *
- * @author AMD
+ * @author jerse
  */
 public class LineaPedidos {
 
-    private ListaVehiculos lista;
-    //15 porque los pedidos son 15
-    private int capacidad = 15;
+    private ListaVehiculos visibles;   // máx 3
+    private ListaVehiculos pendientes; // cola simple usando nuestra lista
 
-    public LineaPedidos() {
-        generarPedidos();
-    }
+    public LineaPedidos(ListaVehiculos pedidosGenerados) {
+        visibles = new ListaVehiculos();
+        pendientes = new ListaVehiculos();
 
-    //Similar a cinta transportadora crear materiales
-    public Vehiculo generarPedido() {
-        int aleatorio = (int) (Math.random() * 4);
-        switch (aleatorio) {
-            case 0:
-                return new Vehiculo("Sedan de Lujo", 5000);
-            case 1:
-                return new Vehiculo("Pick-up de alta gama", 12000);
-            case 2:
-                return new Vehiculo("Maquinaria de alta gama para trabajos pesados", 17500);
-            case 3:
-                return new Vehiculo("Superauto Deportivo", 20000);
-            default:
-                return new Vehiculo("Error", 0);
+        int n = pedidosGenerados.tamano();
+        int toVis = (n >= 3) ? 3 : n;
+        for (int i = 0; i < toVis; i++) {
+            visibles.add(pedidosGenerados.get(i));
+        }
+        for (int i = 3; i < n; i++) {
+            pendientes.add(pedidosGenerados.get(i));
         }
     }
 
-    public void generarPedidos() {
-        lista = new ListaVehiculos();
-
-        for (int i = 0; i < capacidad; i++) {
-            Vehiculo pedido = generarPedido();
-            lista.agregar(pedido);
+    /**
+     * Toma un pedido visible (lo remueve) y repone desde pendientes si hay.
+     */
+    public Vehiculo tomarPedidoVisible(int indiceVisible) {
+        Vehiculo v = visibles.remove(indiceVisible);
+        if (!pendientes.estaVacia()) {
+            // traer "frente" de pendientes: posición 0
+            Vehiculo siguiente = pendientes.remove(0);
+            visibles.add(siguiente);
         }
+        return v;
     }
 
-    public Vehiculo obtenerSiguientePedido() {
-        if (lista.getCabeza() == null) {
-            return null;
-        }
-
-        Vehiculo pedido = lista.getCabeza().vehiculo;
-        lista.setCabeza(lista.getCabeza().siguiente);
-        return pedido;
+    public ListaVehiculos getVisibles() {
+        return visibles;
     }
 
-    public boolean hayPedidos() {
-        return lista.getCabeza() != null;
+    public ListaVehiculos getPendientes() {
+        return pendientes;
     }
-
-    public ListaVehiculos getLista() {
-        return lista;
-    }
-
+    
 }

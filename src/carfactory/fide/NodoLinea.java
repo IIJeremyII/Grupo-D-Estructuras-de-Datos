@@ -10,11 +10,10 @@ package carfactory.fide;
  */
 public class NodoLinea {
 
-    lineaProduccion linea;
+    LineaProduccion dato;
     NodoLinea siguiente;
 
-    public NodoLinea(lineaProduccion linea) {
-        this.linea = linea;
-        this.siguiente = null;
+    NodoLinea(LineaProduccion d) {
+        this.dato = d;
     }
 }

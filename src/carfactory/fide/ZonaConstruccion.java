@@ -6,63 +6,31 @@ package carfactory.fide;
 
 /**
  *
- * @author jeremy.segura
+ * @author jerse
  */
 public class ZonaConstruccion {
-    private NodoLinea cabeza;
-    private int cantidad;
+    private ListaLineas lineas;
 
     public ZonaConstruccion() {
-        cabeza = null;
-        cantidad = 0;
-
-        for (int i = 0; i < 3; i++) {
-            agregarLinea();
-        }
+        lineas = new ListaLineas();
+        lineas.add(new LineaProduccion());
+        lineas.add(new LineaProduccion());
+        lineas.add(new LineaProduccion());
     }
 
-    private void agregarLinea() {
-        NodoLinea nueva = new NodoLinea(new lineaProduccion());
-        if (cabeza == null) {
-            cabeza = nueva;
-        } else {
-            NodoLinea actual = cabeza;
-            while (actual.siguiente != null) {
-                actual = actual.siguiente;
+    public ListaLineas getLineas() {
+        return lineas;
+    }
+
+    /**
+     * Devuelve índice de una línea libre o -1 si todas están ocupadas.
+     */
+    public int indiceLineaLibre() {
+        for (int i = 0; i < lineas.tamano(); i++) {
+            if (!lineas.get(i).tieneVehiculo()) {
+                return i;
             }
-            actual.siguiente = nueva;
         }
-        cantidad++;
+        return -1;
     }
-
-    public boolean iniciarVehiculo(String tipo, int index) {
-        lineaProduccion linea = getLinea(index);
-        if (linea != null && linea.estaLibre()) {
-            return linea.iniciarConstruccion(tipo);
-        }
-        return false;
-    }
-
-    public boolean usarMaterialEnLinea(int index, material m) {
-        lineaProduccion linea = getLinea(index);
-        if (linea != null) {
-            return linea.agregarMaterial(m);
-        }
-        return false;
-    }
-
-    public lineaProduccion getLinea(int index) {
-        NodoLinea actual = cabeza;
-        int contador = 0;
-        while (actual != null) {
-            if (contador == index) {
-                return actual.linea;
-            }
-            actual = actual.siguiente;
-            contador++;
-        }
-        return null;
-    }
-    
 }
-    

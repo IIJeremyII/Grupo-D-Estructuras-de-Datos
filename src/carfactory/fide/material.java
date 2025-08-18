@@ -8,12 +8,12 @@ package carfactory.fide;
  *
  * @author jerse
  */
-public class material { // Inicio de la clase
+public class Material { // Inicio de la clase
 
     private String nombre;
-    private int valor;
+    private double valor;
 
-    public material(String nombre, int valor) {
+    public Material(String nombre, double valor) {
         this.nombre = nombre;
         this.valor = valor;
     }
@@ -22,12 +22,9 @@ public class material { // Inicio de la clase
         return nombre;
     }
 
-    public int getValor() {
+    public double getValor() {
         return valor;
     }
 
-    @Override
-    public String toString() {
-        return nombre + " ($" + valor + ")";
-    }
+    
 }//Fin de la clase 
