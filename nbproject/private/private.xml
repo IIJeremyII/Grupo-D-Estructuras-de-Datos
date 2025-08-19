@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/gui/JuegoFrame.java</file>
             <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/CarFactoryFide.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/Material.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/Vehiculo.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/NodoMaterial.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/ListaMateriales.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/NodoVehiculo.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/ListaVehiculos.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/LineaProduccion.java</file>
-            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/NodoLinea.java</file>
+            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/backend/ReglasFabrica.java</file>
+            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/backend/Fabrica.java</file>
+            <file>file:/C:/Users/jerse/Documents/Github/Grupo-D-Estructuras-de-Datos/src/carfactory/fide/backend/CintaTransportadora.java</file>
         </group>
     </open-files>
 </project-private>

@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package carfactory.fide;
-
+import javax.swing.SwingUtilities;
+import carfactory.fide.gui.JuegoFrame;
 
 /**
  *
@@ -14,7 +15,13 @@ package carfactory.fide;
 public class CarFactoryFide {
 
     public static void main(String[] args) {//INICIO DEL MAIN
-        
+        SwingUtilities.invokeLater(()
+                -> {
+            JuegoFrame frame = new JuegoFrame();
+            frame.setVisible(true);
+        }
+        );
+    
         
         
     }//FIN DEL MAIN

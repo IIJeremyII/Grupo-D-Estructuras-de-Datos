@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package carfactory.fide;
+package carfactory.fide.backend;
+
+import carfactory.fide.backend.Basurero;
 
 /**
  *
@@ -32,12 +34,13 @@ public class Fabrica {
                 : (numeroFabrica == 2) ? CatalogoVehiculos.fabrica2()
                         : CatalogoVehiculos.fabrica3();
 
-        ListaVehiculos pedidos = new ListaVehiculos();
-        for (int i = 0; i < 15; i++) {
+        int nPedidos = ReglasFabrica.pedidosIniciales(numeroFabrica);
+        ListaVehiculos pedidosGenerados = new ListaVehiculos();
+        for (int i = 0; i < nPedidos; i++) {
             int idx = rng.nextInt(catalogo.tamano());
-            pedidos.add(catalogo.get(idx));
+            pedidosGenerados.add(catalogo.get(idx));
         }
-        this.lineaPedidos = new LineaPedidos(pedidos);
+        this.lineaPedidos = new LineaPedidos(pedidosGenerados);
 
         // Inventario permitido según fábrica
         this.inventario = (numeroFabrica == 1) ? MaterialesPermitidos.fabrica1()
