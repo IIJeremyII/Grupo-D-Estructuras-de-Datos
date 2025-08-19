@@ -35,8 +35,11 @@ public class JuegoFrame extends JFrame {
     private LineaPanel linea0;
     private LineaPanel linea1;
     private LineaPanel linea2;
+    
+    //Zona de ascensos de la empresa
+    private LadderPanel panelAscenso;
 
-    // Estilos rápidos
+  
     private Font fontTitulo = new Font("SansSerif", Font.BOLD, 16);
     private Font fontNormal = new Font("SansSerif", Font.PLAIN, 14);
 
@@ -118,6 +121,11 @@ public class JuegoFrame extends JFrame {
         panelInferior.add(barraEstado, BorderLayout.SOUTH);
 
         add(panelInferior, BorderLayout.SOUTH);
+        
+        
+        //ASCENSO A LA IZQUIERDA DEL TODO
+        panelAscenso = new LadderPanel();
+        add(panelAscenso, BorderLayout.WEST);
     }
 
     private TitledBorder titulo(String t) {
@@ -143,6 +151,7 @@ public class JuegoFrame extends JFrame {
         refrescarDinero();
         refrescarCinta();
         refrescarLineas();
+        panelAscenso.setIndiceDesdeNivel(nivelActual, false);
     }
 
     private void refrescarPedidos() {
@@ -473,10 +482,12 @@ public class JuegoFrame extends JFrame {
             nivelActual++;
             mostrarMensaje("Felicidades, lograste avanzar a la fábrica " + nivelActual);
             iniciarFabrica(nivelActual);
+            //ASCENSO VISUAL
+            panelAscenso.setIndiceDesdeNivel(nivelActual, false);
             refrescarTodo();
         } else {
             mostrarMensaje("¡Victoria! Has completado la Fábrica 3.");
-            // Puedes deshabilitar interacciones si quieres
+            panelAscenso.setIndiceDesdeNivel(nivelActual, true);
         }
         refrescarDinero();
     }
