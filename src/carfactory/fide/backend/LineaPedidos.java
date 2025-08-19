@@ -10,8 +10,8 @@ package carfactory.fide.backend;
  */
 public class LineaPedidos {
 
-    private ListaVehiculos visibles;   // máx 3
-    private ListaVehiculos pendientes; // cola simple usando nuestra lista
+    private ListaVehiculos visibles;   //3 pedidos visibles en el hub
+    private ListaVehiculos pendientes;
 
     public LineaPedidos(ListaVehiculos pedidosGenerados) {
         visibles = new ListaVehiculos();

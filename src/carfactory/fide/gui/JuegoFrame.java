@@ -40,8 +40,9 @@ public class JuegoFrame extends JFrame {
     private LadderPanel panelAscenso;
 
   
-    private Font fontTitulo = new Font("SansSerif", Font.BOLD, 16);
-    private Font fontNormal = new Font("SansSerif", Font.PLAIN, 14);
+    private Font fontTitulo = Temas.TITLE;
+    private Font fontNormal = Temas.BODY;
+    
 
     public JuegoFrame() {
         super("CarFactory-Fide");
@@ -53,6 +54,7 @@ public class JuegoFrame extends JFrame {
         // Nivel inicial
         nivelActual = 1;
         iniciarFabrica(nivelActual);
+        getContentPane().setBackground(Temas.BG);
 
         construirUI();
         refrescarTodo();
@@ -66,17 +68,21 @@ public class JuegoFrame extends JFrame {
 
     private void construirUI() {
         // --- TOP (HUB + dinero/objetivo)
-        panelTop = new JPanel(new BorderLayout());
-        panelTop.setBorder(new EmptyBorder(8, 8, 4, 8));
+        panelTop = new GradientPanel(Temas.GRAD_TOP_A, Temas.GRAD_TOP_B);
+        panelTop.setLayout(new BorderLayout());
+        panelTop.setBorder(new javax.swing.border.EmptyBorder(8, 8, 4, 8));
 
         panelHubPedidos = new JPanel();
         panelHubPedidos.setLayout(new GridLayout(1, 3, 8, 0));
         panelHubPedidos.setBorder(titulo("HUB de pedidos"));
+        panelHubPedidos.setBackground(Temas.PANEL);
         panelTop.add(panelHubPedidos, BorderLayout.WEST);
+        
 
         panelDinero = new JPanel();
         panelDinero.setLayout(new GridLayout(2, 1, 4, 4));
         panelDinero.setBorder(titulo("Estado económico"));
+        panelDinero.setBackground(Temas.PANEL);
         panelTop.add(panelDinero, BorderLayout.EAST);
 
         add(panelTop, BorderLayout.NORTH);
@@ -85,6 +91,7 @@ public class JuegoFrame extends JFrame {
         panelCentro = new JPanel();
         panelCentro.setLayout(new GridLayout(3, 1, 8, 8));
         panelCentro.setBorder(new EmptyBorder(8, 8, 8, 8));
+        panelCentro.setBackground(Temas.BG);
 
         linea0 = new LineaPanel(0);
         linea1 = new LineaPanel(1);
@@ -99,6 +106,7 @@ public class JuegoFrame extends JFrame {
         // --- BASURERO (derecha)
         panelBasurero = new JPanel(new BorderLayout());
         panelBasurero.setPreferredSize(new Dimension(220, 0));
+        panelBasurero.setBackground(Temas.BIN_BORDER);
         panelBasurero.setBorder(titulo("Basurero (arrastrar materiales aquí)"));
         JLabel basurero = crearEtiquetaGrande("🗑️ Basurero");
         basurero.setHorizontalAlignment(SwingConstants.CENTER);
@@ -111,6 +119,7 @@ public class JuegoFrame extends JFrame {
 
         panelCinta = new JPanel();
         panelCinta.setBorder(titulo("Cinta transportadora"));
+        panelCinta.setBackground(Temas.PANEL);
 
         barraEstado = new JLabel("Listo.");
         barraEstado.setBorder(new EmptyBorder(6, 8, 8, 8));
@@ -119,6 +128,9 @@ public class JuegoFrame extends JFrame {
         JPanel panelInferior = new JPanel(new BorderLayout());
         panelInferior.add(panelCinta, BorderLayout.CENTER);
         panelInferior.add(barraEstado, BorderLayout.SOUTH);
+        panelInferior.setBackground(Temas.BG);
+        panelCinta.setBackground(Temas.PANEL);
+        barraEstado.setForeground(Temas.TEXT);
 
         add(panelInferior, BorderLayout.SOUTH);
         
@@ -130,7 +142,7 @@ public class JuegoFrame extends JFrame {
 
     private TitledBorder titulo(String t) {
         TitledBorder b = BorderFactory.createTitledBorder(
-                new LineBorder(Color.DARK_GRAY, 1), t);
+                new javax.swing.border.LineBorder(Temas.CARD_BORDER, 1), t);
         b.setTitleFont(fontTitulo);
         return b;
     }
@@ -139,8 +151,9 @@ public class JuegoFrame extends JFrame {
         JLabel l = new JLabel(texto);
         l.setFont(fontTitulo);
         l.setOpaque(true);
-        l.setBackground(new Color(245, 245, 245));
-        l.setBorder(new LineBorder(Color.LIGHT_GRAY));
+        l.setBackground(Temas.BIN_BG);
+        l.setForeground(Temas.TEXT);
+        l.setBorder(new javax.swing.border.LineBorder(Temas.BIN_BORDER, 2, true));
         return l;
     }
 
@@ -180,14 +193,18 @@ public class JuegoFrame extends JFrame {
 
     private JPanel crearTarjetaPedido(String nombreVehiculo, int indiceVisible) {
         JPanel card = new JPanel(new BorderLayout());
-        card.setBorder(new CompoundBorder(
-                new LineBorder(new Color(100, 149, 237)),
-                new EmptyBorder(8, 8, 8, 8)
+        card.setOpaque(true);
+        card.setBackground(Temas.CARD_BG);
+        card.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.LineBorder(Temas.CARD_BORDER_ACC, 2, true),
+                new javax.swing.border.EmptyBorder(8, 8, 8, 8)
         ));
         JLabel titulo = new JLabel("Pedido");
         titulo.setFont(fontNormal);
+        titulo.setForeground(Temas.SUBTEXT);
         JLabel nombre = new JLabel(nombreVehiculo);
         nombre.setFont(fontTitulo);
+        nombre.setForeground(Temas.TEXT);
 
         card.add(titulo, BorderLayout.NORTH);
         card.add(nombre, BorderLayout.CENTER);
@@ -195,7 +212,17 @@ public class JuegoFrame extends JFrame {
         // Hacer draggable como "PEDIDO:indice"
         String payload = "PEDIDO:" + indiceVisible;
         DraggableSupport.hacerArrastrable(card, payload);
+        card.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                card.setBackground(Temas.HOVER);
+            }
 
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                card.setBackground(Temas.CARD_BG);
+            }
+        });
         return card;
     }
 
@@ -247,22 +274,36 @@ public class JuegoFrame extends JFrame {
     }
 
     private JPanel crearTarjetaMaterial(Material m, int indiceEnCinta) {
-        JPanel card = new JPanel(new GridLayout(2,1));
-        card.setBorder(new CompoundBorder(
-                new LineBorder(new Color(60, 179, 113)),
-                new EmptyBorder(6, 6, 6, 6)
+        JPanel card = new JPanel(new GridLayout(2, 1));
+        card.setOpaque(true);
+        card.setBackground(Temas.CARD_BG);
+        card.setBorder(new javax.swing.border.CompoundBorder(
+                new javax.swing.border.LineBorder(Temas.CARD_BORDER_MAT, 2, true),
+                new javax.swing.border.EmptyBorder(6, 6, 6, 6)
         ));
         JLabel t = new JLabel(m.getNombre());
         t.setFont(fontNormal);
-        JLabel v = new JLabel("$" + (long)m.getValor());
+        t.setForeground(Temas.TEXT);
+        JLabel v = new JLabel("$" + (long) m.getValor());
         v.setFont(fontNormal);
+        v.setForeground(Temas.SUBTEXT);
         card.add(t);
         card.add(v);
 
         // Draggable como "MATERIAL:indice"
         String payload = "MATERIAL:" + indiceEnCinta;
         DraggableSupport.hacerArrastrable(card, payload);
+        card.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent e) {
+                card.setBackground(Temas.HOVER);
+            }
 
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent e) {
+                card.setBackground(Temas.CARD_BG);
+            }
+        });
         return card;
     }
 
@@ -424,11 +465,13 @@ public class JuegoFrame extends JFrame {
 
             add(centro, BorderLayout.CENTER);
 
-            setBackground(new Color(245,245,245));
-            setBorder(new CompoundBorder(
-                    titulo("Línea " + (indice+1)),
-                    new EmptyBorder(10,10,10,10)
+            setBackground(Temas.PANEL);
+            setBorder(new javax.swing.border.CompoundBorder(
+                    titulo("Línea " + (indice + 1)),
+                    new javax.swing.border.EmptyBorder(10, 10, 10, 10)
             ));
+            lblTitulo.setForeground(Temas.TEXT);
+            lblContenido.setForeground(Temas.SUBTEXT);
 
             // Drop handler para esta línea
             setTransferHandler(new LineaDropHandler(indice));

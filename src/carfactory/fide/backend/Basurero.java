@@ -13,9 +13,9 @@ public class Basurero {
     private Basurero() {
     }
 
-    /**
-     * Aplica pérdida al desechar un material. Devuelve la pérdida aplicada.
-     */
+    
+     //Aplica pérdida al desechar un material. Devuelve la pérdida aplicada.
+     
     public static double desechar(Material m, Fabrica fabrica) {
         double perdida = m.getValor() * 0.6;
         fabrica.agregarDinero(-perdida);

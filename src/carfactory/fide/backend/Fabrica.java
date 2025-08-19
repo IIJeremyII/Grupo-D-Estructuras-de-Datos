@@ -29,7 +29,7 @@ public class Fabrica {
         this.dineroActual = 0;
         this.rng = new PRNG(semilla);
 
-        // Catálogo y pedidos (15) válidos para esta fábrica
+   
         ListaVehiculos catalogo = (numeroFabrica == 1) ? CatalogoVehiculos.fabrica1()
                 : (numeroFabrica == 2) ? CatalogoVehiculos.fabrica2()
                         : CatalogoVehiculos.fabrica3();
@@ -84,7 +84,7 @@ public class Fabrica {
         if (!lp.puedeAceptarMaterial(candidato)) {
             return false; // "Material incorrecto"
         }
-        // Ahora sí removemos de la cinta y colocamos
+        // Ahora sí quitrmos de la cinta y colocamos
         Material tomado = cinta.tomarMaterial(indiceMaterialCinta);
         lp.colocarMaterial(tomado);
 
