@@ -37,7 +37,7 @@ public class Fabrica {
         int nPedidos = ReglasFabrica.pedidosIniciales(numeroFabrica);
         ListaVehiculos pedidosGenerados = new ListaVehiculos();
         for (int i = 0; i < nPedidos; i++) {
-            int idx = rng.nextInt(catalogo.tamano());
+            int idx = rng.nextInt(catalogo.tamano()); // aca RNG actua generando los pedidos iniciales aleatorios
             pedidosGenerados.add(catalogo.get(idx));
         }
         this.lineaPedidos = new LineaPedidos(pedidosGenerados);
@@ -50,7 +50,7 @@ public class Fabrica {
         // Cinta con slots según fábrica + autorellenar inicial
         int capacidad = ReglasFabrica.slotsCinta(numeroFabrica);
         this.cinta = new CintaTransportadora(capacidad);
-        this.cinta.autorellenar(inventario, rng);
+        this.cinta.autorellenar(inventario, rng); // Rng funciona para rellenar aleatoriamente los objetos iniciales de la cinta
 
         // 3 líneas fijas
         this.zonaConstruccion = new ZonaConstruccion();
@@ -89,7 +89,7 @@ public class Fabrica {
         lp.colocarMaterial(tomado);
 
         // Autorellenar si corresponde
-        cinta.autorellenar(inventario, rng);
+        cinta.autorellenar(inventario, rng); // autorellena con materiales aleatorios
         return true;
     }
 
@@ -115,7 +115,7 @@ public class Fabrica {
     public double desecharMaterialDeCinta(int indiceMaterialCinta) {
         Material m = cinta.tomarMaterial(indiceMaterialCinta);
         double perdida = Basurero.desechar(m, this);
-        cinta.autorellenar(inventario, rng);
+        cinta.autorellenar(inventario, rng); // autorrellena la cinta con los materiales aleatorios
         return perdida;
     }
 

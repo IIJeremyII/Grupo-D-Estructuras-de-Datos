@@ -12,7 +12,6 @@ import java.awt.Font;
  */
 public class Temas {
     private Temas() {}
-    // Paleta (ajústala a tu gusto)
     public static final Color BG        = new Color(245, 247, 250);
     public static final Color PANEL     = new Color(252, 253, 255);
     public static final Color TEXT      = new Color(35, 38, 47);

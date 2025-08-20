@@ -46,7 +46,7 @@ public class CintaTransportadora {
     public void autorellenar(ListaMateriales inventario, PRNG rng) {
         while (materiales.tamano() < capacidad) {
             int idx = rng.nextInt(inventario.tamano());
-            materiales.add(inventario.get(idx));
+            materiales.add(inventario.get(idx)); // rellena la cinta hasta su capacidad con objetos aleatorios gracias a PRNG
         }
     }
 }//FIN DE LA CLASE

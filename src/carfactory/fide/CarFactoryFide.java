@@ -11,7 +11,6 @@ import carfactory.fide.gui.JuegoFrame;
  * @author jerse
  */
 
-
 public class CarFactoryFide {
 
     public static void main(String[] args) {//INICIO DEL MAIN
@@ -21,9 +20,7 @@ public class CarFactoryFide {
             frame.setVisible(true);
         }
         );
-    
-        
-        
+
     }//FIN DEL MAIN
 
 }
